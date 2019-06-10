@@ -1,0 +1,19 @@
+
+select¡@a.Sup_code, sum(a.hournums) as hours from 
+(select "Staff_no","Staff_name","Sup_code",("eff_to_date" - "eff_from_date") as hournums 
+  from eloise_rocky_staff 
+  where "Staff_type" = 'PMO')a
+  group by a.Sup_code
+
+SQL> select Sup_code, sum(hournums) as hours from (select Staff_no,Staff_name,Sup_code,(eff_to_date - eff_from_date) as hournums from eloise_staff 
+  2    where Staff_type = 'PMO') group by Sup_code;
+
+no rows selected
+
+
+
+sqlldr userid=gzsmcdev01/gzsmcdev01@GZSMCDEV control='D:\test.ctl'
+
+sqlldr userid=gzsmcdev01/gzsmcdev01@GZSMCDEV control='/home/eloise/Oracle/test.ctl'
+
+sqlldr userid=gzsmcdev01/gzsmcdev01@GZSMCDEV control='test.ctl'

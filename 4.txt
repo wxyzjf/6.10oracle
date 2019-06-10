@@ -1,0 +1,67 @@
+select Sup_code, sum(hournums) as hours from (select Staff_no,Staff_name,Sup_code,(eff_to_date - eff_from_date) as hournums from eloise_staff 
+  where Staff_type = 'PMO') group by Sup_code
+
+
+  CREATE TABLE GZSMCDEV01.ELOISE_STAFF 
+   (	Staff_no VARCHAR2(20 BYTE) NOT NULL ENABLE, 
+	Staff_type VARCHAR2(20 BYTE), 
+	Staff_name VARCHAR2(25 BYTE), 
+	Sup_code VARCHAR2(20 BYTE), 
+	dsm_code VARCHAR2(20 BYTE), 
+	sm_code VARCHAR2(20 BYTE), 
+	eff_from_date DATE, 
+	eff_to_date DATE, 
+	trans_date DATE, 
+	trans_from VARCHAR2(20 BYTE), 
+	trans_to VARCHAR2(20 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE GZSMC01_TAB ;
+ 
+
+
+
+  CREATE TABLE "GZSMCDEV01"."ELOISE_ROCKY_STAFF" 
+   (	"Staff_no" VARCHAR2(20 BYTE) NOT NULL ENABLE, 
+	"Staff_type" VARCHAR2(20 BYTE), 
+	"Staff_name" VARCHAR2(25 BYTE), 
+	"Sup_code" VARCHAR2(20 BYTE), 
+	"dsm_code" VARCHAR2(20 BYTE), 
+	"sm_code" VARCHAR2(20 BYTE), 
+	"eff_from_date" DATE, 
+	"eff_to_date" DATE, 
+	"trans_date" DATE, 
+	"trans_from" VARCHAR2(20 BYTE), 
+	"trans_to" VARCHAR2(20 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "GZSMC01_TAB" ;
+select¡@"Sup_code", sum(hournums) as hours from 
+(select "Staff_no","Staff_name","Sup_code",("eff_to_date" - "eff_from_date") as hournums 
+  from eloise_rocky_staff 
+  where "Staff_type" = 'PMO') group by "Sup_code";
+
+
+
+
+
+
+select¡@a.Sup_code, sum(a.hournums) as hours from 
+(select "Staff_no","Staff_name","Sup_code",("eff_to_date" - "eff_from_date") as hournums 
+  from eloise_rocky_staff 
+  where "Staff_type" = 'PMO')a
+  group by a.Sup_code
+
+select¡@"Sup_code", sum(hournums) as hours from 
+(select "Staff_no","Staff_name","Sup_code",("eff_to_date" - "eff_from_date") as hournums 
+  from eloise_rocky_staff 
+  where "Staff_type" = 'PMO') group by "Sup_code";
+
+
+http://webcache.googleusercontent.com/search?q=cache:gt0EUfC7fywJ:https://blog.51cto.com/baser/1136948&hl=zh-CN&gl=hk&strip=1&vwsrc=0
+
+https://docs.oracle.com/cd/B10500_01/text.920/a96518/aload.htm

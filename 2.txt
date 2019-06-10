@@ -1,0 +1,446 @@
+sqlplus gzsmcdev01/gzsmcdev01@GZSMCDEV
+sqlldr
+select * from dual
+
+
+Last login: Mon Jun  3 13:35:33 2019 from 172.23.33.69
+[root@GZDEV02 ~]# ls -rlht
+total 5.3M
+-rw-r--r--. 1 root root 9.3K Apr 16  2015 install.log.syslog
+-rw-r--r--. 1 root root  42K Apr 16  2015 install.log
+-rw-------. 1 root root 2.2K Apr 16  2015 anaconda-ks.cfg
+drwxr-xr-x. 2 root root 4.0K Apr 16  2015 Videos
+drwxr-xr-x. 2 root root 4.0K Apr 16  2015 Templates
+drwxr-xr-x. 2 root root 4.0K Apr 16  2015 Public
+drwxr-xr-x. 2 root root 4.0K Apr 16  2015 Pictures
+drwxr-xr-x. 2 root root 4.0K Apr 16  2015 Music
+drwxr-xr-x. 2 root root 4.0K Apr 16  2015 Desktop
+drwxr-xr-x. 4 root root 4.0K Feb 22  2017 Downloads
+drwxr-xr-x. 2 root root 4.0K Apr 28  2017 Documents
+-rw-r--r--  1 root root 5.2M Feb 19 16:06 scikit_learn-0.20.2-cp37-cp37m-manylinux1_x86_64.whl
+[root@GZDEV02 ~]# su - ^C
+[root@GZDEV02 ~]# sqlplus 
+-bash: sqlplus: command not found
+[root@GZDEV02 ~]# su - kevinou
+[kevinou@GZDEV02 ~]$ ls
+a.c  a.out  bigdata_src  hadoop-2.7.4-src.tar.gz  openobex-1.7.1-Source  openobex-1.7.1-Source.tar.gz  py_prj  run  test  u_prf_subr_info
+[kevinou@GZDEV02 ~]$ sqlplus
+
+SQL*Plus: Release 11.2.0.1.0 Production on Mon Jun 3 17:46:42 2019
+
+Copyright (c) 1982, 2009, Oracle.  All rights reserved.
+
+Enter user-name: ^C
+[kevinou@GZDEV02 ~]$ env|grep ^C
+[kevinou@GZDEV02 ~]$ vi ~/.bash_profile 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+esh_profile
+
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+        . ~/.bashrc
+fi
+
+
+
+# for oracle
+export ORACLE_HOSTNAME=GZDEV02
+export ORACLE_BASE=/opt/DBApp/oracle
+export ORACLE_HOME=$ORACLE_BASE/product/11.2.0/db_1
+export ORACLE_SID=gzsmcdev
+export PATH=$PATH:$HOME/bin:$ORACLE_HOME/bin
+#export LD_LIBRARY_PATH=$ORACLE_HOME/lib:/usr/lib:$ORACLE_HOME/bin
+export LD_LIBRARY_PATH=$ORACLE_HOME/lib
+
+# User specific environment and startup programs
+
+# User specific environment and startup programs
+
+export "LS_COLORS=rs=0:di=01;35:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;05;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=35;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.tbz=01;31:*.tbz2=01;31:*.bz=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.axa=01;36:*.oga=01;36:*.spx=01;36:*.xspf=01;36:"
+
+
+# .bash_profile
+
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+        . ~/.bashrc
+fi
+
+
+
+# for oracle
+export ORACLE_HOSTNAME=GZDEV02
+export ORACLE_BASE=/opt/DBApp/oracle
+export ORACLE_HOME=$ORACLE_BASE/product/11.2.0/db_1
+export ORACLE_SID=gzsmcdev
+export PATH=$PATH:$HOME/bin:$ORACLE_HOME/bin
+#export LD_LIBRARY_PATH=$ORACLE_HOME/lib:/usr/lib:$ORACLE_HOME/bin
+export LD_LIBRARY_PATH=$ORACLE_HOME/lib
+
+# User specific environment and startup programs
+
+# User specific environment and startup programs
+
+export "LS_COLORS=rs=0:di=01;35:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;05;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=35;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.tbz=01;31:*.tbz2=01;31:*.bz=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.axa=01;36:*.oga=01;36:*.spx=01;36:*.xspf=01;36:"
+
+
+export PATH
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+[kevinou@GZDEV02 ~]$ ls /ho^C
+[kevinou@GZDEV02 ~]$ exit
+logout
+[root@GZDEV02 ~]# ls /home
+1  1.sh  barry  bill  eloise  eva  gz01  kent  kevinou  lora  lost+found  nestor  oracle  ray  rick  sara  vanessa
+[root@GZDEV02 ~]# su - eloise
+[eloise@GZDEV02 ~]$ ls -rlht
+total 144K
+drwxr-xr-x 2 eloise gzdev 4.0K May 23 13:48 eloise
+drwxr-xr-x 2 eloise gzdev 4.0K May 23 13:48 loise
+-rw-r--r-- 1 eloise gzdev  399 May 24 16:42 data.f
+-rw-r--r-- 1 eloise gzdev   41 May 27 11:19 testfile
+-rw-r--r-- 1 eloise gzdev    7 May 27 11:25 test
+-rw-r--r-- 1 eloise gzdev   48 May 27 11:35 oops.txt
+-rw-r--r-- 1 eloise gzdev   27 May 27 11:36 plane.txt
+-rw-r--r-- 1 eloise gzdev  158 May 27 11:52 video.txt
+-rw-r--r-- 1 eloise gzdev   40 May 27 13:45 video2.txt
+-rw-r--r-- 1 eloise gzdev   43 May 27 13:59 myfile.txt
+-rw-r--r-- 1 eloise gzdev   27 May 27 14:04 parts.txt
+-rw-r--r-- 1 eloise gzdev  104 May 27 14:08 names.txt
+-rw-r--r-- 1 eloise gzdev   88 May 27 14:09 town.txt
+-rw-r--r-- 1 eloise gzdev   72 May 27 14:14 towns.txt
+-rw-r--r-- 1 eloise gzdev   42 May 27 14:19 pers2
+-rw-r--r-- 1 eloise gzdev   46 May 27 14:26 pers
+-rw-r--r-- 1 eloise gzdev   18 May 27 14:33 pas1
+-rw-r--r-- 1 eloise gzdev   23 May 27 14:34 pas2
+-rw-r--r-- 1 eloise gzdev   70 May 27 14:39 split1
+-rw-r--r-- 1 eloise gzdev   14 May 27 14:39 xac
+-rw-r--r-- 1 eloise gzdev   28 May 27 14:39 xab
+-rw-r--r-- 1 eloise gzdev   28 May 27 14:39 xaa
+-rw-r--r-- 1 eloise gzdev  220 May 27 15:00 grade.txt
+-rw-r--r-- 1 eloise gzdev  220 May 27 15:01 wow
+-rw-r--r-- 1 eloise gzdev  220 May 27 15:02 delete_me_and_die
+-rw-r--r-- 1 eloise gzdev    0 May 28 10:44 fi
+-rw-r--r-- 1 eloise gzdev   79 May 28 10:48 iftest
+-rw-r--r-- 1 eloise gzdev    0 May 28 10:50 iftest32
+-rw-r--r-- 1 eloise gzdev   99 May 28 10:52 iftest2
+-rw-r--r-- 1 eloise gzdev    0 May 28 10:59 grepif
+-rw-r--r-- 1 eloise gzdev  131 May 28 11:02 gerpif
+drwxrwxr-x 7 eloise gzdev 4.0K May 28 15:50 wxy
+-rw-r--r-- 1 eloise gzdev  118 May 29 15:24 arraytest.awk
+drwxrwxrwx 7 eloise gzdev 4.0K May 30 09:26 Linux
+drwxr-xr-x 3 eloise gzdev 4.0K May 30 11:21 tmp
+drwxr-xr-x 3 eloise gzdev 4.0K May 30 15:03 LinuxTest
+drwxr-xr-x 2 eloise gzdev 4.0K May 30 16:38 mytest
+drwxr-xr-x 2 eloise gzdev 4.0K Jun  3 12:05 531
+drwxr-xr-x 2 eloise gzdev 4.0K Jun  3 13:54 603
+[eloise@GZDEV02 ~]$ vi ~/.bash_profile 
+
+PATH=$PATH:$HOME/bin
+# .bash_profile
+
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+        . ~/.bashrc
+fi
+
+# User specific environment and startup programs
+
+
+# for oracle
+export ORACLE_HOSTNAME=GZDEV02
+export ORACLE_BASE=/opt/DBApp/oracle
+export ORACLE_HOME=$ORACLE_BASE/product/11.2.0/db_1
+export ORACLE_SID=gzsmcdev
+export PATH=$PATH:$HOME/bin:$ORACLE_HOME/bin
+#export LD_LIBRARY_PATH=$ORACLE_HOME/lib:/usr/lib:$ORACLE_HOME/bin
+export LD_LIBRARY_PATH=$ORACLE_HOME/lib
+
+
+export PATH
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+".bash_profile" 21L, 469C written                                                                                                          
+[eloise@GZDEV02 ~]$ . .bash_profile 
+[eloise@GZDEV02 ~]$ sqlplus
+
+SQL*Plus: Release 11.2.0.1.0 Production on Mon Jun 3 17:47:45 2019
+
+Copyright (c) 1982, 2009, Oracle.  All rights reserved.
+
+Enter user-name: ^C
+[eloise@GZDEV02 ~]$ 
+Last login: Mon Jun  3 16:24:35 2019 from 172.23.33.82
+[eloise@GZDEV02 ~]$ ls -rlth
+total 144K
+drwxr-xr-x 2 eloise gzdev 4.0K May 23 13:48 eloise
+drwxr-xr-x 2 eloise gzdev 4.0K May 23 13:48 loise
+-rw-r--r-- 1 eloise gzdev  399 May 24 16:42 data.f
+-rw-r--r-- 1 eloise gzdev   41 May 27 11:19 testfile
+-rw-r--r-- 1 eloise gzdev    7 May 27 11:25 test
+-rw-r--r-- 1 eloise gzdev   48 May 27 11:35 oops.txt
+-rw-r--r-- 1 eloise gzdev   27 May 27 11:36 plane.txt
+-rw-r--r-- 1 eloise gzdev  158 May 27 11:52 video.txt
+-rw-r--r-- 1 eloise gzdev   40 May 27 13:45 video2.txt
+-rw-r--r-- 1 eloise gzdev   43 May 27 13:59 myfile.txt
+-rw-r--r-- 1 eloise gzdev   27 May 27 14:04 parts.txt
+-rw-r--r-- 1 eloise gzdev  104 May 27 14:08 names.txt
+-rw-r--r-- 1 eloise gzdev   88 May 27 14:09 town.txt
+-rw-r--r-- 1 eloise gzdev   72 May 27 14:14 towns.txt
+-rw-r--r-- 1 eloise gzdev   42 May 27 14:19 pers2
+-rw-r--r-- 1 eloise gzdev   46 May 27 14:26 pers
+-rw-r--r-- 1 eloise gzdev   18 May 27 14:33 pas1
+-rw-r--r-- 1 eloise gzdev   23 May 27 14:34 pas2
+-rw-r--r-- 1 eloise gzdev   70 May 27 14:39 split1
+-rw-r--r-- 1 eloise gzdev   14 May 27 14:39 xac
+-rw-r--r-- 1 eloise gzdev   28 May 27 14:39 xab
+-rw-r--r-- 1 eloise gzdev   28 May 27 14:39 xaa
+-rw-r--r-- 1 eloise gzdev  220 May 27 15:00 grade.txt
+-rw-r--r-- 1 eloise gzdev  220 May 27 15:01 wow
+-rw-r--r-- 1 eloise gzdev  220 May 27 15:02 delete_me_and_die
+-rw-r--r-- 1 eloise gzdev    0 May 28 10:44 fi
+-rw-r--r-- 1 eloise gzdev   79 May 28 10:48 iftest
+-rw-r--r-- 1 eloise gzdev    0 May 28 10:50 iftest32
+-rw-r--r-- 1 eloise gzdev   99 May 28 10:52 iftest2
+-rw-r--r-- 1 eloise gzdev    0 May 28 10:59 grepif
+-rw-r--r-- 1 eloise gzdev  131 May 28 11:02 gerpif
+drwxrwxr-x 7 eloise gzdev 4.0K May 28 15:50 wxy
+-rw-r--r-- 1 eloise gzdev  118 May 29 15:24 arraytest.awk
+drwxrwxrwx 7 eloise gzdev 4.0K May 30 09:26 Linux
+drwxr-xr-x 3 eloise gzdev 4.0K May 30 11:21 tmp
+drwxr-xr-x 3 eloise gzdev 4.0K May 30 15:03 LinuxTest
+drwxr-xr-x 2 eloise gzdev 4.0K May 30 16:38 mytest
+drwxr-xr-x 2 eloise gzdev 4.0K Jun  3 12:05 531
+drwxr-xr-x 2 eloise gzdev 4.0K Jun  3 13:54 603
+[eloise@GZDEV02 ~]$ sqlplus
+
+SQL*Plus: Release 11.2.0.1.0 Production on Mon Jun 3 17:48:19 2019
+
+Copyright (c) 1982, 2009, Oracle.  All rights reserved.
+
+Enter user-name: ^C^C
+[eloise@GZDEV02 ~]$ sqlldr
+
+SQL*Loader: Release 11.2.0.1.0 - Production on Mon Jun 3 17:48:24 2019
+
+Copyright (c) 1982, 2009, Oracle and/or its affiliates.  All rights reserved.
+
+
+Usage: SQLLDR keyword=value [,keyword=value,...]
+
+Valid Keywords:
+
+    userid -- ORACLE username/password           
+   control -- control file name                  
+       log -- log file name                      
+       bad -- bad file name                      
+      data -- data file name                     
+   discard -- discard file name                  
+discardmax -- number of discards to allow          (Default all)
+      skip -- number of logical records to skip    (Default 0)
+      load -- number of logical records to load    (Default all)
+    errors -- number of errors to allow            (Default 50)
+      rows -- number of rows in conventional path bind array or between direct path data saves
+               (Default: Conventional path 64, Direct path all)
+  bindsize -- size of conventional path bind array in bytes  (Default 256000)
+    silent -- suppress messages during run (header,feedback,errors,discards,partitions)
+    direct -- use direct path                      (Default FALSE)
+   parfile -- parameter file: name of file that contains parameter specifications
+  parallel -- do parallel load                     (Default FALSE)
+      file -- file to allocate extents from      
+skip_unusable_indexes -- disallow/allow unusable indexes or index partitions  (Default FALSE)
+skip_index_maintenance -- do not maintain indexes, mark affected indexes as unusable  (Default FALSE)
+commit_discontinued -- commit loaded rows when load is discontinued  (Default FALSE)
+  readsize -- size of read buffer                  (Default 1048576)
+external_table -- use external table for load; NOT_USED, GENERATE_ONLY, EXECUTE  (Default NOT_USED)
+columnarrayrows -- number of rows for direct path column array  (Default 5000)
+streamsize -- size of direct path stream buffer in bytes  (Default 256000)
+multithreading -- use multithreading in direct path  
+ resumable -- enable or disable resumable for current session  (Default FALSE)
+resumable_name -- text string to help identify resumable statement
+resumable_timeout -- wait time (in seconds) for RESUMABLE  (Default 7200)
+date_cache -- size (in entries) of date conversion cache  (Default 1000)
+no_index_errors -- abort load on any index errors  (Default FALSE)
+
+PLEASE NOTE: Command-line parameters may be specified either by
+position or by keywords.  An example of the former case is 'sqlldr
+scott/tiger foo'; an example of the latter is 'sqlldr control=foo
+userid=scott/tiger'.  One may specify parameters by position before
+but not after parameters specified by keywords.  For example,
+'sqlldr scott/tiger control=foo logfile=log' is allowed, but
+'sqlldr scott/tiger control=foo log' is not, even though the
+position of the parameter 'log' is correct.
+[eloise@GZDEV02 ~]$ sqlplus gzsmcdev01/gzsmcdev01@GZSMCDEV
+
+SQL*Plus: Release 11.2.0.1.0 Production on Mon Jun 3 17:48:42 2019
+
+Copyright (c) 1982, 2009, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - 64bit Production
+With the Partitioning, Oracle Label Security, OLAP, Data Mining,
+Oracle Database Vault and Real Application Testing options
+
+SQL> quit                      
+Disconnected from Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - 64bit Production
+With the Partitioning, Oracle Label Security, OLAP, Data Mining,
+Oracle Database Vault and Real Application Testing options
+[eloise@GZDEV02 ~]$ sqlldr
+
+SQL*Loader: Release 11.2.0.1.0 - Production on Mon Jun 3 17:49:04 2019
+
+Copyright (c) 1982, 2009, Oracle and/or its affiliates.  All rights reserved.
+
+
+Usage: SQLLDR keyword=value [,keyword=value,...]
+
+Valid Keywords:
+
+    userid -- ORACLE username/password           
+   control -- control file name                  
+       log -- log file name                      
+       bad -- bad file name                      
+      data -- data file name                     
+   discard -- discard file name                  
+discardmax -- number of discards to allow          (Default all)
+      skip -- number of logical records to skip    (Default 0)
+      load -- number of logical records to load    (Default all)
+    errors -- number of errors to allow            (Default 50)
+      rows -- number of rows in conventional path bind array or between direct path data saves
+               (Default: Conventional path 64, Direct path all)
+  bindsize -- size of conventional path bind array in bytes  (Default 256000)
+    silent -- suppress messages during run (header,feedback,errors,discards,partitions)
+    direct -- use direct path                      (Default FALSE)
+   parfile -- parameter file: name of file that contains parameter specifications
+  parallel -- do parallel load                     (Default FALSE)
+      file -- file to allocate extents from      
+skip_unusable_indexes -- disallow/allow unusable indexes or index partitions  (Default FALSE)
+skip_index_maintenance -- do not maintain indexes, mark affected indexes as unusable  (Default FALSE)
+commit_discontinued -- commit loaded rows when load is discontinued  (Default FALSE)
+  readsize -- size of read buffer                  (Default 1048576)
+external_table -- use external table for load; NOT_USED, GENERATE_ONLY, EXECUTE  (Default NOT_USED)
+columnarrayrows -- number of rows for direct path column array  (Default 5000)
+streamsize -- size of direct path stream buffer in bytes  (Default 256000)
+multithreading -- use multithreading in direct path  
+ resumable -- enable or disable resumable for current session  (Default FALSE)
+resumable_name -- text string to help identify resumable statement
+resumable_timeout -- wait time (in seconds) for RESUMABLE  (Default 7200)
+date_cache -- size (in entries) of date conversion cache  (Default 1000)
+no_index_errors -- abort load on any index errors  (Default FALSE)
+
+PLEASE NOTE: Command-line parameters may be specified either by
+position or by keywords.  An example of the former case is 'sqlldr
+scott/tiger foo'; an example of the latter is 'sqlldr control=foo
+userid=scott/tiger'.  One may specify parameters by position before
+but not after parameters specified by keywords.  For example,
+'sqlldr scott/tiger control=foo logfile=log' is allowed, but
+'sqlldr scott/tiger control=foo log' is not, even though the
+position of the parameter 'log' is correct.
+[eloise@GZDEV02 ~]$ 

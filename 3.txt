@@ -1,0 +1,576 @@
+
+  CREATE TABLE "GZSMCDEV01"."ELOISE_ROCKY_STAFF" 
+   (	"Staff_no" VARCHAR2(20 BYTE) NOT NULL ENABLE, 
+	"Staff_type" VARCHAR2(20 BYTE), 
+	"Staff_name" VARCHAR2(25 BYTE), 
+	"Sup_code" VARCHAR2(20 BYTE), 
+	"dsm_code" VARCHAR2(20 BYTE), 
+	"sm_code" VARCHAR2(20 BYTE), 
+	"eff_from_date" DATE, 
+	"eff_to_date" DATE, 
+	"trans_date" DATE, 
+	"trans_from" VARCHAR2(20 BYTE), 
+	"trans_to" VARCHAR2(20 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "GZSMC01_TAB" ;
+ 
+
+
+
+
+
+
+
+ 10     eff_to_date date,
+ 11     trans_date date,
+ 12     trans_from varchar2(20),
+ 13     trans_to varchar2(20),
+ 14     create_ts date
+ 15  );
+Create table eloise_rocky_staff
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> 
+The semaphore timeout period has expired. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Last login: Thu Jun  6 14:06:05 2019 from 172.23.33.69
+[root@GZDEV02 ~]# sql^C
+[root@GZDEV02 ~]# su - kevinou
+[kevinou@GZDEV02 ~]$ sqlplus gzsmcdev01/gzsmcdev01@gzsmcdev
+
+SQL*Plus: Release 11.2.0.1.0 Production on Thu Jun 6 17:23:49 2019
+
+Copyright (c) 1982, 2009, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - 64bit Production
+With the Partitioning, Oracle Label Security, OLAP, Data Mining,
+Oracle Database Vault and Real Application Testing options
+
+SQL> select¡@a.Sup_code, sum(a.hournums) as hours from 
+  2  (select "Staff_no","Staff_name","Sup_code",("eff_to_date" - "eff_from_date") as hournums 
+  3    from eloise_rocky_staff 
+  4    where "Staff_type" = 'PMO')a
+  5    group by a.Sup_code;
+select¡@a.Sup_code, sum(a.hournums) as hours from
+      *
+ERROR at line 1:
+ORA-00911: invalid character
+
+
+SQL> select a.Sup_code, sum(a.hournums) as hours from 
+  2  (select "Staff_no","Staff_name","Sup_code",("eff_to_date" - "eff_from_date") as hournums 
+  3    from eloise_rocky_staff 
+  4    where "Staff_type" = 'PMO')a
+  5    group by a.Sup_code;
+  group by a.Sup_code
+           *
+ERROR at line 5:
+ORA-00904: "A"."SUP_CODE": invalid identifier
+
+
+SQL> select "Staff_no","Staff_name","Sup_code",("eff_to_date" - "eff_from_date") as hournums 
+  2    from eloise_rocky_staff 
+  3    where "Staff_type" = 'PMO';
+
+no rows selected
+
+SQL> select a.Sup_code, sum(a.hournums) as hours from 
+  2  (select "Staff_no","Staff_name","Sup_code",("eff_to_date" - "eff_from_date") as hournums 
+  3    from eloise_rocky_staff 
+  4    where "Staff_type" = 'PMO')a
+  5    group by a.Sup_code;
+  group by a.Sup_code
+           *
+ERROR at line 5:
+ORA-00904: "A"."SUP_CODE": invalid identifier
+
+
+SQL> 
+SQL> select a.Sup_code, sum(a.hournums) as hours from 
+  2  (select Staff_no,Staff_name,Sup_code,(eff_to_date - eff_from_date) as hournums 
+  3    from eloise_rocky_staff 
+  4    where Staff_type = 'PMO')a
+  5    group by a.Sup_code;
+  where Staff_type = 'PMO')a
+        *
+ERROR at line 4:
+ORA-00904: "STAFF_TYPE": invalid identifier
+
+
+SQL> desc eloise_rocky_staff;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ Staff_no                                  NOT NULL VARCHAR2(20)
+ Staff_type                                         VARCHAR2(20)
+ Staff_name                                         VARCHAR2(25)
+ Sup_code                                           VARCHAR2(20)
+ dsm_code                                           VARCHAR2(20)
+ sm_code                                            VARCHAR2(20)
+ eff_from_date                                      DATE
+ eff_to_date                                        DATE
+ trans_date                                         DATE
+ trans_from                                         VARCHAR2(20)
+ trans_to                                           VARCHAR2(20)
+
+SQL> select a.Sup_code, sum(a.hournums) as hours from 
+  2  (select s.Staff_no,s.Staff_name,s.Sup_code,(s.eff_to_date - s.eff_from_date) as hournums 
+  3    from eloise_rocky_staff s
+  4    where s.Staff_type = 'PMO') asa
+  5    group by a.Sup_code;
+  where s.Staff_type = 'PMO') asa
+        *
+ERROR at line 4:
+ORA-00904: "S"."STAFF_TYPE": invalid identifier
+
+
+SQL> select a.Sup_code, sum(a.hournums) as hours from 
+  2  (select s.Staff_no,s.Staff_name,s.Sup_code,(s.eff_to_date - s.eff_from_date) as hournums 
+  3    from eloise_rocky_staff s where s.Staff_type = 'PMO') as a group by a.Sup_code;
+  from eloise_rocky_staff s where s.Staff_type = 'PMO') as a group by a.Sup_code
+                                                        *
+ERROR at line 3:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select a.Sup_code, sum(a.hournums) as hours from 
+  2  (select s.Staff_no,s.Staff_name,s.Sup_code,(s.eff_to_date - s.eff_from_date) as hournums 
+  3    from eloise_rocky_staff s where s.Staff_type = 'PMO')   a group by a.Sup_code;
+  from eloise_rocky_staff s where s.Staff_type = 'PMO')   a group by a.Sup_code
+                                  *
+ERROR at line 3:
+ORA-00904: "S"."STAFF_TYPE": invalid identifier
+
+
+SQL> select s.Staff_no,s.Staff_name,s.Sup_code,(s.eff_to_date - s.eff_from_date) as hournums 
+  2    from eloise_rocky_staff s where s.Staff_type = 'PMO';
+  from eloise_rocky_staff s where s.Staff_type = 'PMO'
+                                  *
+ERROR at line 2:
+ORA-00904: "S"."STAFF_TYPE": invalid identifier
+
+
+SQL> Staff_typeselect s.Staff_no,s.Staff_name,s.Sup_code,(s.eff_to_date - s.eff_from_date) as hournums 
+SP2-0734: unknown command beginning "Staff_type..." - rest of line ignored.
+SQL>   from eloise_rocky_staff s where s.Staff_type = 'PMO'
+SP2-0734: unknown command beginning "from elois..." - rest of line ignored.
+SQL> select s.Staff_no,s.Staff_name,s.Sup_code,(s.eff_to_date - s.eff_from_date) as hournums 
+  2    from eloise_rocky_staff s where s.Staff_type = 'PMO';
+  from eloise_rocky_staff s where s.Staff_type = 'PMO'
+                                  *
+ERROR at line 2:
+ORA-00904: "S"."STAFF_TYPE": invalid identifier
+
+
+SQL> select * from  from eloise_rocky_staff s where^C
+
+SQL> select *  from eloise_rocky_staff s where rownum<10l
+  2  ^C
+
+SQL> select *  from eloise_rocky_staff s where rownum<10;
+
+no rows selected
+
+SQL> desc eloise_rocky_staff;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ Staff_no                                  NOT NULL VARCHAR2(20)
+ Staff_type                                         VARCHAR2(20)
+ Staff_name                                         VARCHAR2(25)
+ Sup_code                                           VARCHAR2(20)
+ dsm_code                                           VARCHAR2(20)
+ sm_code                                            VARCHAR2(20)
+ eff_from_date                                      DATE
+ eff_to_date                                        DATE
+ trans_date                                         DATE
+ trans_from                                         VARCHAR2(20)
+ trans_to                                           VARCHAR2(20)
+
+SQL> select staff_type from eloise_rocky_staff;       
+select staff_type from eloise_rocky_staff
+       *
+ERROR at line 1:
+ORA-00904: "STAFF_TYPE": invalid identifier
+
+
+SQL> select column_type from all_tab_columns where table_name like 'ELOISE%STAFF%';
+select column_type from all_tab_columns where table_name like 'ELOISE%STAFF%'
+       *
+ERROR at line 1:
+ORA-00904: "COLUMN_TYPE": invalid identifier
+
+
+SQL> select column_type from all_tab_columns where table_name like 'ELOISE%STAFF%'^[^C
+
+SQL> 
+SQL> select¡@Sup_code, sum(hournums) as hours from 
+  2  (select Staff_no,Staff_name,Sup_code,(eff_to_date - eff_from_date) as hournums 
+  3    from eloise_staff 
+  4    where Staff_type = 'PMO') group by Sup_code;
+select¡@Sup_code, sum(hournums) as hours from
+      *
+ERROR at line 1:
+ORA-00911: invalid character
+
+
+SQL> select Sup_code, sum(hournums) as hours from (select Staff_no,Staff_name,Sup_code,(eff_to_date - eff_from_date) as hournums from eloise_staff 
+  2    where Staff_type = 'PMO') group by Sup_code;
+
+no rows selected
+
+SQL> QUIT
+Disconnected from Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - 64bit Production
+With the Partitioning, Oracle Label Security, OLAP, Data Mining,
+Oracle Database Vault and Real Application Testing options
+[kevinou@GZDEV02 ~]$ ls -rht
+u_prf_subr_info               openobex-1.7.1-Source  a.c    test                     bigdata_src
+openobex-1.7.1-Source.tar.gz  run                    a.out  hadoop-2.7.4-src.tar.gz  py_prj
+[kevinou@GZDEV02 ~]$ exit
+logout
+[root@GZDEV02 ~]# ls
+anaconda-ks.cfg  Downloads           Music     scikit_learn-0.20.2-cp37-cp37m-manylinux1_x86_64.whl
+Desktop          install.log         Pictures  Templates
+Documents        install.log.syslog  Public    Videos
+[root@GZDEV02 ~]# su - eloisewu
+su: user eloisewu does not exist
+[root@GZDEV02 ~]# su - eloise
+[eloise@GZDEV02 ~]$ ls -rht
+eloise    plane.txt   town.txt   split1     delete_me_and_die  gerpif         mytest      D:abc.txt
+loise     video.txt   towns.txt  xac        fi                 wxy            531
+data.f    video2.txt  pers2      xab        iftest             arraytest.awk  603
+testfile  myfile.txt  pers       xaa        iftest32           Linux          TABLE1.sql
+test      parts.txt   pas1       grade.txt  iftest2            tmp            afiedt.buf
+oops.txt  names.txt   pas2       wow        grepif             LinuxTest      abc.txt
+[eloise@GZDEV02 ~]$ sqlldr
+
+SQL*Loader: Release 11.2.0.1.0 - Production on Thu Jun 6 17:38:22 2019
+
+Copyright (c) 1982, 2009, Oracle and/or its affiliates.  All rights reserved.
+
+
+Usage: SQLLDR keyword=value [,keyword=value,...]
+
+Valid Keywords:
+
+    userid -- ORACLE username/password           
+   control -- control file name                  
+       log -- log file name                      
+       bad -- bad file name                      
+      data -- data file name                     
+   discard -- discard file name                  
+discardmax -- number of discards to allow          (Default all)
+      skip -- number of logical records to skip    (Default 0)
+      load -- number of logical records to load    (Default all)
+    errors -- number of errors to allow            (Default 50)
+      rows -- number of rows in conventional path bind array or between direct path data saves
+               (Default: Conventional path 64, Direct path all)
+  bindsize -- size of conventional path bind array in bytes  (Default 256000)
+    silent -- suppress messages during run (header,feedback,errors,discards,partitions)
+    direct -- use direct path                      (Default FALSE)
+   parfile -- parameter file: name of file that contains parameter specifications
+  parallel -- do parallel load                     (Default FALSE)
+      file -- file to allocate extents from      
+skip_unusable_indexes -- disallow/allow unusable indexes or index partitions  (Default FALSE)
+skip_index_maintenance -- do not maintain indexes, mark affected indexes as unusable  (Default FALSE)
+commit_discontinued -- commit loaded rows when load is discontinued  (Default FALSE)
+  readsize -- size of read buffer                  (Default 1048576)
+external_table -- use external table for load; NOT_USED, GENERATE_ONLY, EXECUTE  (Default NOT_USED)
+columnarrayrows -- number of rows for direct path column array  (Default 5000)
+streamsize -- size of direct path stream buffer in bytes  (Default 256000)
+multithreading -- use multithreading in direct path  
+ resumable -- enable or disable resumable for current session  (Default FALSE)
+resumable_name -- text string to help identify resumable statement
+resumable_timeout -- wait time (in seconds) for RESUMABLE  (Default 7200)
+date_cache -- size (in entries) of date conversion cache  (Default 1000)
+no_index_errors -- abort load on any index errors  (Default FALSE)
+
+PLEASE NOTE: Command-line parameters may be specified either by
+position or by keywords.  An example of the former case is 'sqlldr
+scott/tiger foo'; an example of the latter is 'sqlldr control=foo
+userid=scott/tiger'.  One may specify parameters by position before
+but not after parameters specified by keywords.  For example,
+'sqlldr scott/tiger control=foo logfile=log' is allowed, but
+'sqlldr scott/tiger control=foo log' is not, even though the
+position of the parameter 'log' is correct.
+[eloise@GZDEV02 ~]$ vi test.csv
+
+Staff No,STAFF_TYPE,Staff_NAME,SUP_CODE,DSM_CODE,SM_CODE,eff_from_date,eff_to_date,trans_date,trans_from,trans_to
+F10120,SM,Frank Mo,,,F10120,2015-03-01,2015-03-31,,,
+F13318,SM,Henry Tse,,,F13318,2015-03-01,2015-03-31,,,
+F10122,SM,Ricky Lei,,,F10122,2015-03-01,2015-03-31,,,
+F10121,DSM,Ng Mei Ching May,,,F10120,2015-03-01,2015-03-31,,,
+F10168,DSM,Chan Wan Ha Ann,,,F10120,2015-03-01,2015-03-31,,,
+F10174,DSM,Tam Man Chi Sankie,,,F10122,2015-03-01,2015-03-31,,,
+F11148,DSM,Leung Chi Kin Ken,,,F10122,2015-03-01,2015-03-31,,,
+F13316,DSM,Tong Chung Kei Keith,,,F13318,2015-03-01,2015-03-31,,,
+F14067,DSM,Wong Tsz Fong YY,,,F10120,2015-03-01,2015-03-31,,,
+F14123,DSM,Wong Hei Man Samson,,,F13318,2015-03-01,2015-03-31,,,
+F14287,DSM,Ho Siu Fong Ann,,,F13318,2015-03-01,2015-03-31,,,
+F10123,SUP,Cheung Hing Chiu,,F10168,F10120,2015-03-01,2015-03-31,,,
+F10257,SUP,Lam Kin Tung Thomson,,F10121,F10120,2015-03-01,2015-03-31,,,
+F11147,SUP,Lee Hok Hin,,F11148,F10122,2015-03-01,2015-03-31,,,
+F11240,SUP,Lee Pui Yi Emily,,F10121,F10120,2015-03-01,2015-03-31,,,
+F11280,SUP,Choi Hau Man Alvin,,F14067,F10120,2015-03-01,2015-03-31,,,
+F12419,SUP,Ho Ko Leong Color,,F10168,F10120,2015-03-01,2015-03-31,,,
+F14016,SUP,Ding Chi Leung Daniel,,F13316,F13318,2015-03-01,2015-03-31,,,
+F14022,SUP,Chow Kit Yee Kennie,,F13316,F13318,2015-03-01,2015-03-31,,,
+F14023,SUP,Lee Wing Chun Zinc,,F14123,F13318,2015-03-01,2015-03-31,,,
+F14063,SUP,Tsang Man Yuen Royman,,F10174,F10122,2015-03-01,2015-03-31,,,
+F14069,SUP,Lam Yin Ting Khloe,,F14067,F10120,2015-03-01,2015-03-31,,,
+F14143,SUP,Ng Hoi Yan,,F13316,F13318,2015-03-01,2015-03-31,,,
+F14170,SUP,Chan Chun Yip Edwin,,F14123,F13318,2015-03-01,2015-03-31,,,
+F14189,SUP,Or Chung Man Cookie,,F11148,F10122,2015-03-01,2015-03-31,,,
+F14198,SUP,Poon Chi Kuen Michael,,F14287,F13318,2015-03-01,2015-03-31,,,
+F14273,SUP,Fu Hak Joe,,F13316,F13318,2015-03-01,2015-03-31,,,
+F14309,SUP,Ling Hong Kiu Kit,,F14287,F13318,2015-03-01,2015-03-31,,,
+FA0539,PMO,Wong Wah On Bennie,F11280,F14067,F10120,2015-03-01,2015-03-31,,,
+FA0541,PMO,Ma Chak Bun Ben,F11280,F14067,F10120,2015-03-01,2015-03-31,,,
+FA0576,PMO,Chan Kwok Man,F11280,F14067,F10120,2015-03-01,2015-03-31,,,
+FA0578,PMO,Ko Yuet Ho Michelle,F11280,F14067,F10120,2015-03-01,2015-03-31,,,
+FA2042,PMO,Yeung Tsz Fung Ricky,F10123,F10168,F10120,2015-03-01,2015-03-31,,,
+FA2317,PMO,Cheung Tseuk Wing,F11240,F10121,F10120,2015-03-01,2015-03-31,,,
+FA2327,PMO,Tsang Yi Kan,F11147,F11148,F10122,2015-03-01,2015-03-31,,,
+FA2388,PMO,Tong Kam Wing Sam,F10257,F10121,F10120,2015-03-01,2015-03-31,,,
+FA2467,PMO,Fong Chi Keung Frank,F10123,F10168,F10120,2015-03-01,2015-03-31,,,
+FA2546,PMO,Lam Chi Chung,F11240,F10121,F10120,2015-03-01,2015-03-31,,,
+FA2598,PMO,Tai Wai Lung Roy,F10257,F10121,F10120,2015-03-01,2015-03-31,,,
+FA2640,PMO,Cheuk On Ki Angel,F11147,F11148,F10122,2015-03-01,2015-03-31,,,
+FA2713,PMO,Chan Chun Hon,F12419,F10168,F10120,2015-03-01,2015-03-31,,,
+FA2720,PMO,Wong Kai Ming,F12419,F10168,F10120,2015-03-01,2015-03-31,,,
+FA2732,PMO,Kam Kin Chuen Kinson,F11240,F10121,F10120,2015-03-01,2015-03-31,,,
+FA2760,PMO,Cheng Man Tat,F10257,F10121,F10120,2015-03-01,2015-03-31,,,
+FA2798,PMO,Poon Yuen Leen Simon,F12419,F10168,F10120,2015-03-01,2015-03-31,,,
+FA2834,PMO,Wong Chau Hung Zue,F12419,F10168,F10120,2015-03-01,2015-03-31,,,
+FA2855,PMO,Luk Long Yin Jason,,F10174,F10122,2015-03-01,2015-03-31,,,
+FA2887,PMO,Poon Kwai Sing Jaffe,F11147,F11148,F10122,2015-03-01,2015-03-31,,,
+FA2935,PMO,Ho Pak On Kevin,F10257,F10121,F10120,2015-03-01,2015-03-31,,,
+FA2952,PMO,Ling Tsz Nim Amigo,F11240,F10121,F10120,2015-03-01,2015-03-31,,,
+FA2972,PMO,Hon Leung Chau,F10123,F10168,F10120,2015-03-01,2015-03-31,,,
+FA2973,PMO,Kan Chi Shing Leo,F10123,F10168,F10120,2015-03-01,2015-03-31,,,
+FA2997,PMO,Chan Chi Kit Nick,F14189,F11148,F10122,2015-03-01,2015-03-31,,,
+FA3316,PMO,Lai Chin Wing Tim,F12419,F10168,F10120,2015-03-01,2015-03-31,,,
+FA3341,PMO,Tse Ka Kit Ivan,F11147,F11148,F10122,2015-03-01,2015-03-31,,,
+FA3346,PMO,Chow Fai,F14063,F10174,F10122,2015-03-01,2015-03-31,,,
+FA3348,PMO,Chung Ting Hei Dicki,F12419,F10168,F10120,2015-03-01,2015-03-31,,,
+FA3353,PMO,Chan Ka Wai Alex,F14273,F13316,F13318,2015-03-01,2015-03-31,,,
+FA3355,PMO,Chan Kwok Sum Sam,F14273,F13316,F13318,2015-03-01,2015-03-31,,,
+FA3356,PMO,Chan Lin On Jason,F14016,F13316,F13318,2015-03-01,2015-03-31,,,
+FA3365,PMO,Kam Ka Chuen KK,F14016,F13316,F13318,2015-03-01,2015-03-31,,,
+FA3367,PMO,Lam Shiu Kin Simon,F14016,F13316,F13318,2015-03-01,2015-03-31,,,
+FA3374,PMO,Ng Pui Wa Green,F14016,F13316,F13318,2015-03-01,2015-03-31,,,
+FA3377,PMO,Wong Sze Ki Suki,F14273,F13316,F13318,2015-03-01,2015-03-31,,,
+FA3381,PMO,Yip Chun Pun Ben,F14198,F14287,F13318,2015-03-01,2015-03-31,,,
+FA3387,PMO,Lau Chi Ho Jack,F14198,F14287,F13318,2015-03-01,2015-03-31,,,
+FA3412,PMO,Li Jun Yan Johnny,F11147,F11148,F10122,2015-03-01,2015-03-31,,,
+FA3430,PMO,Ho Tung Shan Elvis,F14023,F14123,F13318,2015-03-01,2015-03-31,,,
+FA3432,PMO,Ip Chak Pui Terence,F14022,F13316,F13318,2015-03-01,2015-03-31,,,
+FA3439,PMO,Yu Ka Man Kaman,F14189,F11148,F10122,2015-03-01,2015-03-31,,,
+FA3442,PMO,Cheung Lit Lun Alan,F14143,F13316,F13318,2015-03-01,2015-03-31,,,
+FA3445,PMO,Mak Sin Yuk Fion,F12419,F10168,F10120,2015-03-01,2015-03-31,,,
+FA3450,PMO,Shum Yan Lan Ivy,F14022,F13316,F13318,2015-03-01,2015-03-31,,,
+FA3455,PMO,Cheung Man Cheung Richard,F10257,F10121,F10120,2015-03-01,2015-03-31,,,
+FA3464,PMO,Chan Yiu Sing Yasen,F14198,F14287,F13318,2015-03-01,2015-03-31,,,
+FA3466,PMO,Li Kai Chun Leo,F10257,F10121,F10120,2015-03-01,2015-03-31,,,
+FA3471,PMO,Cheung Tsz Yeung Leo,F14170,F14123,F13318,2015-03-01,2015-03-31,2015-03-21,F14170,F12419
+FA3474,PMO,Lo Chun Fai Faison,F14069,F14067,F10120,2015-03-01,2015-03-31,,,
+FA3476,PMO,Mok Tsz Kwan Jessica,F14069,F14067,F10120,2015-03-01,2015-03-31,,,
+FA3477,PMO,Ng Yan Wai Wayne,F14069,F14067,F10120,2015-03-01,2015-03-31,,,
+FA3482,PMO,Cheung Ka Wai Kevin,F11280,F14067,F10120,2015-03-01,2015-03-31,,,
+FA3491,PMO,Ho Yat Chun,F14189,F11148,F10122,2015-03-01,2015-03-31,,,
+FA3493,PMO,Lau Wai Kei,F14022,F13316,F13318,2015-03-01,2015-03-31,,,
+FA3494,PMO,Lee Tsz Chung Marco,F14023,F14123,F13318,2015-03-01,2015-03-31,,,
+FA3497,PMO,Ngai Hon Chung Ryan,F14273,F13316,F13318,2015-03-01,2015-03-31,,,
+FA3503,PMO,Ha Cheuk Hei Ryan,F14016,F13316,F13318,2015-03-01,2015-03-31,,,
+FA3504,PMO,Kong Hoi Lam Wind,F14063,F10174,F10122,2015-03-01,2015-03-31,,,
+FA3509,PMO,Mak Tsun Hin Henry,F12419,F10168,F10120,2015-03-01,2015-03-31,,,
+FA3514,PMO,Ho Ka Kit Kenny,F10123,F10168,F10120,2015-03-01,2015-03-31,,,
+FA3519,PMO,Wong Man Hing,F10123,F10168,F10120,2015-03-01,2015-03-31,,,
+FA3524,PMO,Lau Chun Po,F11240,F10121,F10120,2015-03-01,2015-03-31,,,
+FA3526,PMO,Lee Pan Lung Carter,F14016,F13316,F13318,2015-03-01,2015-03-31,,,
+FA3527,PMO,Leung Chun Ming Harrison,F14143,F13316,F13318,2015-03-01,2015-03-31,,,
+FA3529,PMO,Li Hang Wa Joyce,F14063,F10174,F10122,2015-03-01,2015-03-31,,,
+FA3532,PMO,Tseung Yin Yu,F14143,F13316,F13318,2015-03-01,2015-03-31,,,
+FA3536,PMO,Chu Winnie Yu Yee Pinky,F14023,F14123,F13318,2015-03-01,2015-03-31,,,
+FA3560,PMO,Ling Shuk Ching Meko,F14170,F14123,F13318,2015-03-01,2015-03-31,,,
+FA3567,PMO,Cheng Hiu Yan Zix,F14170,F14123,F13318,2015-03-01,2015-03-31,,,
+FA3568,PMO,Cheung Wai Hong Chris,F14143,F13316,F13318,2015-03-01,2015-03-31,,,
+FA3571,PMO,Fung Tsz Him Phoenix,F11240,F10121,F10120,2015-03-01,2015-03-31,,,
+FA3572,PMO,Lam Kin Wai Ken,F14198,F14287,F13318,2015-03-01,2015-03-31,,,
+FA3573,PMO,Tsoi Ying Ha Grace,F14023,F14123,F13318,2015-03-01,2015-03-31,,,
+FA3577,PMO,Leung Kin Hang,F14143,F13316,F13318,2015-03-01,2015-03-31,,,
+FA3580,PMO,Wu Po Nam,F10123,F10168,F10120,2015-03-01,2015-03-31,,,
+FA3581,PMO,Ting Ho Laam Jason,F14189,F11148,F10122,2015-03-01,2015-03-31,,,
+FA3586,PMO,Choi Hiu Fung Royce,F10257,F10121,F10120,2015-03-01,2015-03-31,,,
+FA3596,PMO,Tsang Man Wai Roy,F14143,F13316,F13318,2015-03-01,2015-03-31,,,
+FA3597,PMO,Wong Ka Kui Chris,F14170,F14123,F13318,2015-03-01,2015-03-31,,,
+FA3598,PMO,Chen Xiaoting Olivia,F14023,F14123,F13318,2015-03-01,2015-03-31,,,
+FA3599,PMO,Cheng Pak Tung Jasper,F14069,F14067,F10120,2015-03-01,2015-03-31,,,
+FA3602,PMO,Ng Lung Yau Lionel,F14069,F14067,F10120,2015-03-01,2015-03-31,,,
+FA3604,PMO,Chan Chun Kit Mark,F14069,F14067,F10120,2015-03-01,2015-03-31,,,
+FA3605,PMO,Chang Yick Yuen Yan,F14273,F13316,F13318,2015-03-01,2015-03-31,,,
+FA3606,PMO,Cheuk Hung Shun Don,,F10174,F10122,2015-03-01,2015-03-31,,,
+FA3607,PMO,Chu Tsan Man Clifton,F14016,F13316,F13318,2015-03-01,2015-03-31,,,
+FA3608,PMO,Lam Chi Yuen,F14023,F14123,F13318,2015-03-01,2015-03-31,,,
+FA3612,PMO,Ngan Siu Fai Edmond,F14022,F13316,F13318,2015-03-01,2015-03-31,,,
+FA3614,PMO,Tse Wai Cheong Henry,F14016,F13316,F13318,2015-03-01,2015-03-31,,,
+FA3615,PMO,Yu Siu Lun Alan,F10123,F10168,F10120,2015-03-01,2015-03-31,,,
+FA3619,PMO,Law Ka Yan Miko,F11147,F11148,F10122,2015-03-01,2015-03-31,,,
+FA3623,PMO,Li Lok Hin,F14143,F13316,F13318,2015-03-01,2015-03-31,,,
+FA3627,PMO,Wong Wai Lun Roy,,F14287,F13318,2015-03-01,2015-03-31,,,
+FA3629,PMO,Yip Wing Hong EC,F14069,F14067,F10120,2015-03-01,2015-03-31,,,
+FA3631,PMO,Kwok Yau Choi Bee,F14063,F10174,F10122,2015-03-01,2015-03-31,,,
+FA3632,PMO,Lam Sui Hang Henry,F14170,F14123,F13318,2015-03-01,2015-03-31,,,
+FA3634,PMO,Ng Pok Man,,F10174,F10122,2015-03-01,2015-03-31,,,
+FA3636,PMO,Chow Tsz Fung Kazaf,,F10174,F10122,2015-03-01,2015-03-31,,,
+FA3638,PMO,Lo Chun Yin Ivan,F14022,F13316,F13318,2015-03-01,2015-03-31,,,
+FA3639,PMO,Pun Hong Tommy,F14198,F14287,F13318,2015-03-01,2015-03-31,,,
+FA3640,PMO,Yu Chi Hang Trevor,F14022,F13316,F13318,2015-03-01,2015-03-31,,,
+FA3641,PMO,Leung Chun Sing,F14143,F13316,F13318,2015-03-01,2015-03-31,,,
+FA3642,PMO,Pang Hoi Tang King,F14189,F11148,F10122,2015-03-01,2015-03-31,,,
+FA3643,PMO,Wong Chun Cyrus,F10257,F10121,F10120,2015-03-01,2015-03-31,,,
+FA3644,PMO,Wong Kris Kris,F12419,F10168,F10120,2015-03-01,2015-03-31,,,
+FA3645,PMO,Zen Ka Chun Nelson,F11240,F10121,F10120,2015-03-01,2015-03-31,,,
+FA3646,PMO,Ling Hong Kiu Kit,,F14287,F13318,2015-03-01,2015-03-31,,,
+FA3647,PMO,Cheng Man Chung Kingsley,F11240,F10121,F10120,2015-03-01,2015-03-31,,,
+FA3648,PMO,Fan Chi Ki,F14273,F13316,F13318,2015-03-01,2015-03-31,,,
+FA3649,PMO,Fung Yuen Chi Kazaf,F14273,F13316,F13318,2015-03-01,2015-03-31,,,
+FA3650,PMO,Lam Hoi Chau Dicky,F11240,F10121,F10120,2015-03-01,2015-03-31,,,
+FA3651,PMO,Suen Hok Kwong Gray,F11240,F10121,F10120,2015-03-01,2015-03-31,,,
+FA3652,PMO,Wu Chi Ming Henry,F14022,F13316,F13318,2015-03-01,2015-03-31,,,
+~
+"test.csv" [New] 143L, 10467C written                                                  
+[eloise@GZDEV02 ~]$ ls
+531            data.f             grepif     loise       pas1       TABLE1.sql  town.txt    xab
+603            delete_me_and_die  iftest     myfile.txt  pas2       test        video2.txt  xac
+abc.txt        eloise             iftest2    mytest      pers       test.csv    video.txt
+afiedt.buf     fi                 iftest32   names.txt   pers2      testfile    wow
+arraytest.awk  gerpif             Linux      oops.txt    plane.txt  tmp         wxy
+D:abc.txt      grade.txt          LinuxTest  parts.txt   split1     towns.txt   xaa
+[eloise@GZDEV02 ~]$ man sqlldr
+No manual entry for sqlldr
+[eloise@GZDEV02 ~]$ sqlldr
+
+SQL*Loader: Release 11.2.0.1.0 - Production on Thu Jun 6 17:39:27 2019
+
+Copyright (c) 1982, 2009, Oracle and/or its affiliates.  All rights reserved.
+
+
+Usage: SQLLDR keyword=value [,keyword=value,...]
+
+Valid Keywords:
+
+    userid -- ORACLE username/password           
+   control -- control file name                  
+       log -- log file name                      
+       bad -- bad file name                      
+      data -- data file name                     
+   discard -- discard file name                  
+discardmax -- number of discards to allow          (Default all)
+      skip -- number of logical records to skip    (Default 0)
+      load -- number of logical records to load    (Default all)
+    errors -- number of errors to allow            (Default 50)
+      rows -- number of rows in conventional path bind array or between direct path data saves
+               (Default: Conventional path 64, Direct path all)
+  bindsize -- size of conventional path bind array in bytes  (Default 256000)
+    silent -- suppress messages during run (header,feedback,errors,discards,partitions)
+    direct -- use direct path                      (Default FALSE)
+   parfile -- parameter file: name of file that contains parameter specifications
+  parallel -- do parallel load                     (Default FALSE)
+      file -- file to allocate extents from      
+skip_unusable_indexes -- disallow/allow unusable indexes or index partitions  (Default FALSE)
+skip_index_maintenance -- do not maintain indexes, mark affected indexes as unusable  (Default FALSE)
+commit_discontinued -- commit loaded rows when load is discontinued  (Default FALSE)
+  readsize -- size of read buffer                  (Default 1048576)
+external_table -- use external table for load; NOT_USED, GENERATE_ONLY, EXECUTE  (Default NOT_USED)
+columnarrayrows -- number of rows for direct path column array  (Default 5000)
+streamsize -- size of direct path stream buffer in bytes  (Default 256000)
+multithreading -- use multithreading in direct path  
+ resumable -- enable or disable resumable for current session  (Default FALSE)
+resumable_name -- text string to help identify resumable statement
+resumable_timeout -- wait time (in seconds) for RESUMABLE  (Default 7200)
+date_cache -- size (in entries) of date conversion cache  (Default 1000)
+no_index_errors -- abort load on any index errors  (Default FALSE)
+
+PLEASE NOTE: Command-line parameters may be specified either by
+position or by keywords.  An example of the former case is 'sqlldr
+scott/tiger foo'; an example of the latter is 'sqlldr control=foo
+userid=scott/tiger'.  One may specify parameters by position before
+but not after parameters specified by keywords.  For example,
+'sqlldr scott/tiger control=foo logfile=log' is allowed, but
+'sqlldr scott/tiger control=foo log' is not, even though the
+position of the parameter 'log' is correct.
+[eloise@GZDEV02 ~]$ 
